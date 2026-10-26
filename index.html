@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/saveText.js" defer></script>
+    <script src="js/readTextArea.js" defer></script>
 </head>
 <body>
-    
+    <label for="input">Quantity:</label>
+    <input type="text" id="input" placeholder="Enter an expression...">
+    <button type="button" id="powButton">a^n</button>
+
+    <button type="button" id="piButton">π</button>
+
+    <button type="button" id="roundButton">Round</button>
+
+
+
+    <input type="file" id="fileToLoad">
+    <button class="button" onclick="checkFileProperty()">Load Selected</button>
+    <textarea class="textinput" id="fileInput" cols="40" rows="2"></textarea>
+
+    <button type="button" id="meanButton">Mean</button>
+
+    <button type="button"   id="medianButton">Median</button>
+
+    <button type="button" id="maxButton">Maximum</button>
+
+    <button type="button" id="minButton">Minimum</button>
+
+    <button type="button" id="stDevButton">Standard Deviation</button>
+
 </body>
 </html>
