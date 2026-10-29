@@ -3,34 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AOOD Calculator</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="js/saveText.js" defer></script>
     <script src="js/readTextArea.js" defer></script>
 </head>
 <body>
-    <label for="input">Quantity:</label>
-    <input type="text" id="input" placeholder="Enter an expression...">
-    <button type="button" id="powButton">a^n</button>
+    <div class="app-shell">
+        <header class="page-header">
+            <h1>Calculator</h1>
+        </header>
 
-    <button type="button" id="piButton">π</button>
+        <main>
+            <section class="panel" aria-labelledby="expression-heading">
+                <div class="section-title">
+                    <span class="section-number">01</span>
+                    <h2 id="expression-heading">Expression</h2>
+                </div>
+                <label for="input">Quantity</label>
+                <input type="text" id="input" placeholder="Enter an expression...">
+                <div class="shortcut-row" aria-label="Expression shortcuts">
+                    <button type="button" id="powButton">a^n</button>
+                    <button type="button" id="piButton">π</button>
+                    <button type="button" id="roundButton">Round</button>
+                </div>
+            </section>
 
-    <button type="button" id="roundButton">Round</button>
+            <section class="panel" aria-labelledby="file-heading">
+                <div class="section-title">
+                    <span class="section-number">02</span>
+                    <h2 id="file-heading">Data source</h2>
+                </div>
+                <label for="fileToLoad">Choose a file</label>
+                <div class="file-row">
+                    <input type="file" id="fileToLoad">
+                    <button class="button" type="button" onclick="checkFileProperty()">Load selected</button>
+                </div>
+                <label for="fileInput">Loaded text</label>
+                <textarea class="textinput" id="fileInput" rows="4" placeholder="File contents will appear here..."></textarea>
+            </section>
 
-
-
-    <input type="file" id="fileToLoad">
-    <button class="button" onclick="checkFileProperty()">Load Selected</button>
-    <textarea class="textinput" id="fileInput" cols="40" rows="2"></textarea>
-
-    <button type="button" id="meanButton">Mean</button>
-
-    <button type="button"   id="medianButton">Median</button>
-
-    <button type="button" id="maxButton">Maximum</button>
-
-    <button type="button" id="minButton">Minimum</button>
-
-    <button type="button" id="stDevButton">Standard Deviation</button>
-
+            <section class="panel" aria-labelledby="calculations-heading">
+                <div class="section-title">
+                    <span class="section-number">03</span>
+                    <h2 id="calculations-heading">Calculations</h2>
+                </div>
+                <div class="calculation-grid">
+                    <button type="button" id="meanButton">Mean</button>
+                    <button type="button" id="medianButton">Median</button>
+                    <button type="button" id="maxButton">Maximum</button>
+                    <button type="button" id="minButton">Minimum</button>
+                    <button type="button" id="stDevButton">Standard deviation</button>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
