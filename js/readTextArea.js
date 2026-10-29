@@ -194,6 +194,57 @@ function parseValues(source) {
   return values;
 }
 
+function parseDataValues(source) {
+  const remaining = source.replace(/^\uFEFF/, "").trim();
+  if (!remaining) {
+    throw new Error("Missing data");
+  }
+
+  const values = [];
+  let position = 0;
+  const numberPattern = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?/;
+
+  while (position < remaining.length) {
+    while (/\s/.test(remaining[position] || "")) {
+      position += 1;
+    }
+
+    const match = numberPattern.exec(remaining.slice(position));
+    if (!match) {
+      throw new Error("Invalid data value");
+    }
+
+    const value = Number(match[0]);
+    if (!Number.isFinite(value)) {
+      throw new Error("Invalid data value");
+    }
+    values.push(value);
+    position += match[0].length;
+
+    const valueEnd = position;
+    while (/\s/.test(remaining[position] || "")) {
+      position += 1;
+    }
+    if (position === remaining.length) {
+      break;
+    }
+
+    if (remaining[position] === "," || remaining[position] === ";") {
+      position += 1;
+      while (/\s/.test(remaining[position] || "")) {
+        position += 1;
+      }
+      if (position === remaining.length || remaining[position] === "," || remaining[position] === ";") {
+        throw new Error("Missing data value");
+      }
+    } else if (position === valueEnd) {
+      throw new Error("Invalid data separator");
+    }
+  }
+
+  return values;
+}
+
 function formatNumber(value) {
   return String(Number(value.toPrecision(12)));
 }
@@ -217,7 +268,8 @@ document.getElementById("expressionForm").addEventListener("submit", (event) => 
 
 function runStatistic(statistic) {
   try {
-    const values = parseValues(input.value);
+    const data = document.getElementById("fileInput").value;
+    const values = data.trim() ? parseDataValues(data) : parseValues(input.value);
     let value;
 
     switch (statistic) {

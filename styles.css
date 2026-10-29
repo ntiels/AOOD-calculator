@@ -222,6 +222,13 @@ input[type="file"] {
     flex: 0 0 auto;
 }
 
+.file-status {
+    min-height: 1.5em;
+    margin: -10px 0 14px;
+    color: #62685f;
+    font-size: 0.75rem;
+}
+
 .calculation-grid button:last-child {
     grid-column: 1 / -1;
 }

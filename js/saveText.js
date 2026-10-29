@@ -1,35 +1,26 @@
-function checkFileProperty(){
-  let x = document.getElementById("fileToLoad");
-  let txt = "";
-  if ('files' in x) {
-    if (x.files.length == 0) {
-       txt = "Select one or more files...";
-    } else {
-       loadFileAsText();
-    }
-  } 
-  else {
-    if (x.value == "") {
-      txt += "Select one or more files...";
-    } else {
-      txt += "The files property is not supported by your browser!";
-      txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
-    }
+function checkFileProperty() {
+  const fileInput = document.getElementById("fileToLoad");
+  const fileStatus = document.getElementById("fileStatus");
+  const file = fileInput.files && fileInput.files[0];
+
+  if (!file) {
+    fileStatus.textContent = "Select a file first.";
+    return;
   }
-  document.getElementById("Message").innerHTML = txt;
-}
-function loadFileAsText() {
 
-  let fileToLoad = document.getElementById("fileToLoad").files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    if (typeof reader.result !== "string") {
+      fileStatus.textContent = "Unable to read selected file.";
+      return;
+    }
 
-  let fileReader = new FileReader();
-  fileReader.onload = function(fileLoadedEvent) 
-  {
-    let textFromFileLoaded = fileLoadedEvent.target.result;
-    document.getElementById("fileInput").value = textFromFileLoaded; 
+    document.getElementById("fileInput").value = reader.result;
+    document.getElementById("result").textContent = "";
+    fileStatus.textContent = `Loaded ${file.name}`;
   };
-  
-  fileReader.readAsText(fileToLoad, "UTF-8");
-
+  reader.onerror = () => {
+    fileStatus.textContent = "Unable to read selected file.";
+  };
+  reader.readAsText(file, "UTF-8");
 }
-let fileBox = document.getElementById("fileInput");
