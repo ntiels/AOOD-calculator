@@ -121,6 +121,37 @@ input[type="text"] {
     padding: 12px 14px;
 }
 
+.expression-row {
+    display: flex;
+    gap: 8px;
+}
+
+.expression-row input {
+    min-width: 0;
+    flex: 1;
+}
+
+.expression-row button {
+    min-width: 100px;
+    background: #20231f;
+    color: #fbfcf8;
+    text-align: center;
+}
+
+.expression-row button:hover {
+    background: #4b6c48;
+    border-color: #4b6c48;
+}
+
+.result {
+    display: block;
+    min-height: 1.5em;
+    margin-top: 10px;
+    color: #4b6c48;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
 textarea {
     min-height: 112px;
     padding: 12px 14px;
@@ -208,6 +239,10 @@ input[type="file"] {
 
     .file-row button {
         width: 100%;
+    }
+
+    .expression-row button {
+        min-width: 80px;
     }
 }
 

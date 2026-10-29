@@ -21,7 +21,11 @@
                     <h2 id="expression-heading">Expression</h2>
                 </div>
                 <label for="input">Quantity</label>
-                <input type="text" id="input" placeholder="Enter an expression...">
+                <form class="expression-row" id="expressionForm">
+                    <input type="text" id="input" placeholder="Enter an expression..." autocomplete="off">
+                    <button type="submit">Enter</button>
+                </form>
+                <output class="result" id="result" aria-live="polite"></output>
                 <div class="shortcut-row" aria-label="Expression shortcuts">
                     <button type="button" id="powButton">a^n</button>
                     <button type="button" id="piButton">π</button>
